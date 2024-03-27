@@ -65,6 +65,15 @@ public class Main
 	    System.out.println("First element that fullfill the condition = " + Stream.generate(Math::random).filter(it -> it > 0.5).findFirst());
 	    System.out.println("Any element that fullfill the condition - async = " + Stream.generate(Math::random).filter(it -> it > 0.5).findAny());
 	    System.out.println("Is there element that fullfill the condtion = "+Stream.generate(Math::random).anyMatch(it -> it > 0.5));
-	    
+	    //Optional
+	    System.out.println(Stream.ofNullable(null).findAny().orElse(0));
+	    System.out.println(Stream.ofNullable(null).findAny().orElseGet(() -> Integer.MIN_VALUE));
+	    System.out.println(Stream.ofNullable(null).findAny().orElseThrow(IllegalStateException::new));
+	    Stream.generate(Math::random).limit(10).max(Double::compare).ifPresent(System.out::println);
+	    Stream.generate(Math::random).limit(10).max(Double::compare).ifPresentOrElse(System.out::println, IllegalStateException::new);
+	    Optional<String> optString = Optional.of(new String("a"));
+	    //Will return optional object or empty optional depending on passed arg
+	    Optional<String> optString2 = Optional.ofNullable(new String("a"));
+	    Optional<String> emptyString = Optional.empty();
 	}
 }
