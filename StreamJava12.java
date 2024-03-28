@@ -8,6 +8,7 @@ Write your code in this editor and press "Run" button to execute it.
 import java.util.*;
 import java.util.stream.*;
 import java.math.BigInteger;
+import java.math.BigDecimal;
 
 public class Main
 {
@@ -68,12 +69,24 @@ public class Main
 	    //Optional
 	    System.out.println(Stream.ofNullable(null).findAny().orElse(0));
 	    System.out.println(Stream.ofNullable(null).findAny().orElseGet(() -> Integer.MIN_VALUE));
-	    System.out.println(Stream.ofNullable(null).findAny().orElseThrow(IllegalStateException::new));
+	    //System.out.println(Stream.ofNullable(null).findAny().orElseThrow(IllegalStateException::new));
 	    Stream.generate(Math::random).limit(10).max(Double::compare).ifPresent(System.out::println);
 	    Stream.generate(Math::random).limit(10).max(Double::compare).ifPresentOrElse(System.out::println, IllegalStateException::new);
 	    Optional<String> optString = Optional.of(new String("a"));
 	    //Will return optional object or empty optional depending on passed arg
 	    Optional<String> optString2 = Optional.ofNullable(new String("a"));
 	    Optional<String> emptyString = Optional.empty();
+	    //Iterator on stream
+	    Iterator<Double> iter = Stream.generate(Math::random).limit(10).iterator();
+	    //Convert stream into array
+	    Double[] doubleArray = Stream.generate(Math::random).limit(10).toArray(Double[]::new);
+	    //Convert stream to list
+	    List<Double> doubleList = Stream.generate(Math::random).limit(10).collect(Collectors.toList());
+	    //Convert stream to TreeSet
+	    Set<Double> doubleSet = Stream.generate(Math::random).limit(10).collect(Collectors.toCollection(TreeSet::new));
+	    //Convert double to string and collect them with separator
+	    System.out.println(Stream.generate(Math::random).limit(10).map(Object::toString).collect(Collectors.joining(", ")));
+	    System.out.println("Average stream length = " + Stream.of("Ala", "ma", "kota", "a", "kot", "ma", "Ale", "i", "rybke", "a", "rybka", "ma", "swojego", "wlasnego", "psa").collect(Collectors.summarizingInt(String::length)).getAverage());
+	    
 	}
 }
