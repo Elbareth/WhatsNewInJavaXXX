@@ -87,6 +87,12 @@ public class Main
 	    //Convert double to string and collect them with separator
 	    System.out.println(Stream.generate(Math::random).limit(10).map(Object::toString).collect(Collectors.joining(", ")));
 	    System.out.println("Average stream length = " + Stream.of("Ala", "ma", "kota", "a", "kot", "ma", "Ale", "i", "rybke", "a", "rybka", "ma", "swojego", "wlasnego", "psa").collect(Collectors.summarizingInt(String::length)).getAverage());
+	    //Grouping the stream by value
+	    Map<String, List<Locale>> countryToLocale = Stream.of(Locale.getAvailableLocales()).collect(Collectors.groupingBy(Locale::getCountry));
+	    System.out.println(countryToLocale);
+	    //Spliting the stream by predicat
+	    System.out.println(Stream.generate(Math::random).limit(10).collect(Collectors.partitioningBy(it -> it > 0.5)));
+	    
 	    
 	}
 }
