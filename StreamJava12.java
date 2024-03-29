@@ -92,7 +92,22 @@ public class Main
 	    System.out.println(countryToLocale);
 	    //Spliting the stream by predicat
 	    System.out.println(Stream.generate(Math::random).limit(10).collect(Collectors.partitioningBy(it -> it > 0.5)));
-	    
-	    
+	    //reduce will reduce the stream into one value based on passed function
+	    Stream.generate(Math::random).limit(10).map(it -> it * 10).map(Double::intValue).reduce((a,b) -> a + b).ifPresent(System.out::println);
+	    Stream.generate(Math::random).limit(10).map(it -> it * 10).map(Double::intValue).reduce(Integer::sum).ifPresent(System.out::println);
+	    //reduce with identity value, this value will be return when stream will be empty
+	    System.out.println(Stream.ofNullable(null).reduce(0, (a,b) -> a == b));
+	    //Int Stream
+	    IntStream.of(1,2,3,4,5).forEach(System.out::print);
+	    //Double Stream
+	    DoubleStream.generate(Math::random).limit(10).forEach(System.out::println);
+	    //Generated IntStream - NOT closed range
+	    IntStream.range(0,10).forEach(System.out::println);
+	    //Generated IntStream - with closed range
+	    IntStream.rangeClosed(0,10).forEach(System.out::println);
+	    //Convert primitive types
+        DoubleStream.generate(Math::random).limit(10).map(it -> it * 10).mapToLong(Math::round).forEach(System.out::println);
+        //We convert stream of primityve type into normal stream with objects
+        DoubleStream.generate(Math::random).limit(10).boxed().forEach(System.out::println);
 	}
 }
