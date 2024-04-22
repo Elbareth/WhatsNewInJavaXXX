@@ -14,6 +14,7 @@ public class Main {
         ReadByteFile byteFile = new ReadByteFile();
         ReadRandomAccessFile randomFile = new ReadRandomAccessFile();
         ReadZipFile zipFile = new ReadZipFile();
+        ReadObjectFile objectFile = new ReadObjectFile();
         try {
             readFile.read();
             readFile.copyToFile();
@@ -25,6 +26,8 @@ public class Main {
             randomFile.writeToFile();
             zipFile.readFile();
             zipFile.writeToFile();
+            objectFile.writeToFile();
+            objectFile.readFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
