@@ -15,6 +15,7 @@ public class Main {
         ReadRandomAccessFile randomFile = new ReadRandomAccessFile();
         ReadZipFile zipFile = new ReadZipFile();
         ReadObjectFile objectFile = new ReadObjectFile();
+        ReadFileUsingVirtualMemory virtualMemory = new ReadFileUsingVirtualMemory();
         try {
             readFile.read();
             readFile.copyToFile();
@@ -28,6 +29,7 @@ public class Main {
             zipFile.writeToFile();
             objectFile.writeToFile();
             objectFile.readFile();
+            virtualMemory.readFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
