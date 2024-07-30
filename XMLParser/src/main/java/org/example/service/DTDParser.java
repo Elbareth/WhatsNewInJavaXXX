@@ -16,7 +16,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 public class DTDParser {
-    public Root parseXML(String filename) throws ParserConfigurationException, IOException, SAXException {
+    public Document parseDocument(String filename) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         //We want to validate our xml file
         documentBuilderFactory.setValidating(true);
@@ -42,7 +42,11 @@ public class DTDParser {
                 System.exit(0);
             }
         });
-        Document doc = builder.parse(filename);
+        return builder.parse(filename);
+    }
+    public Root parseXML(String filename) throws ParserConfigurationException, IOException, SAXException
+    {
+        Document doc = parseDocument(filename);
         return parseRootChild(doc.getDocumentElement());
     }
     private Root parseRootChild(Element element)
