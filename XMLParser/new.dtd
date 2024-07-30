@@ -1,0 +1,18 @@
+<!--We create main xml element zero or more-->
+<!ELEMENT root (deer| whatever| fine)*>
+<!--Then we declare the first node in xml one or more-->
+<!ELEMENT deer (recent| highway| pipe)+>
+<!--We create node with required value-->
+<!ELEMENT recent (#PCDATA)>
+<!ATTLIST recent place CDATA #REQUIRED>
+<!-- ? - zero or one entry -->
+<!ELEMENT highway (gas, low, zoo)>
+<!ELEMENT gas (#PCDATA)>
+<!ELEMENT low (#PCDATA)>
+<!ELEMENT zoo (#PCDATA)>
+<!ELEMENT pipe (#PCDATA)>
+<!--In the next step, we declare the list of attribute of the second node-->
+<!--IMPLIED means optional-->
+<!ELEMENT whatever (#PCDATA)>
+<!ATTLIST whatever life CDATA #IMPLIED>
+<!ELEMENT fine (#PCDATA)>

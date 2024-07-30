@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--We import our dtd file to check if our xml is correct-->
+<!DOCTYPE root SYSTEM "new.dtd">
+<root>
+    <deer>
+        <recent place="there">-1457040302.699809</recent>
+        <highway>
+            <gas>carried</gas>
+            <low>1959598633</low>
+            <zoo>-431840101</zoo>
+        </highway>
+        <pipe>student</pipe>
+    </deer>
+    <deer>
+        <recent place="there">-1457040302.699809</recent>
+        <highway>
+            <gas>carried</gas>
+            <low>1959598633</low>
+            <zoo>-431840101</zoo>
+        </highway>
+        <pipe>student</pipe>
+    </deer>
+    <whatever life="say">sweet</whatever>
+    <fine>ring</fine>
+</root>
