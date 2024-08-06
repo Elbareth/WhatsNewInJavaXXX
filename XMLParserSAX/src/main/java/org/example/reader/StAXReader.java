@@ -92,6 +92,7 @@ public class StAXReader {
             {
                 String ch = reader.getElementText();
                 System.out.println("Attr = "+ch);
+                System.out.println("Attr = "+ch);
                 if(ch.startsWith("t"))
                 {
                     int lastIndexOfCome = this.comes.size() - 1;
