@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.reader.SAXReader;
 import org.example.reader.StAXReader;
+import org.example.transform.XSLTTransformer;
 import org.example.writer.DOMWriterWithNamespaces;
 import org.example.writer.DOMWriterWithoutNamespace;
 import org.example.writer.FileWriter;
@@ -11,6 +12,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public class Main {
@@ -36,7 +38,11 @@ public class Main {
             StAXWriter stAXWriter = new StAXWriter();
             stAXWriter.writer("StAXFile.xml");
 
-        } catch (ParserConfigurationException | SAXException | IOException | XMLStreamException e) {
+            //We transform the file
+            XSLTTransformer transformer = new XSLTTransformer();
+            transformer.transform("StAXFile.xml", "index.html");
+
+        } catch (ParserConfigurationException | SAXException | IOException | XMLStreamException | TransformerException e) {
             throw new RuntimeException(e);
         }
     }
