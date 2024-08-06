@@ -5,6 +5,7 @@ import org.example.reader.StAXReader;
 import org.example.writer.DOMWriterWithNamespaces;
 import org.example.writer.DOMWriterWithoutNamespace;
 import org.example.writer.FileWriter;
+import org.example.writer.StAXWriter;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -30,6 +31,10 @@ public class Main {
             DOMWriterWithoutNamespace withoutNamespace = new DOMWriterWithoutNamespace();
             Document documentWithoutNamespace = withoutNamespace.write();
             fileWriter.writeToFile(documentWithoutNamespace, "xmlWithoutNamespace.xml");
+
+            //We use StAX to write to file
+            StAXWriter stAXWriter = new StAXWriter();
+            stAXWriter.writer("StAXFile.xml");
 
         } catch (ParserConfigurationException | SAXException | IOException | XMLStreamException e) {
             throw new RuntimeException(e);
