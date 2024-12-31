@@ -7,8 +7,11 @@ Write your code in this editor and press "Run" button to execute it.
 *******************************************************************************/
 
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import java.util.stream.*;
+import java.time.format.*;
+import java.time.temporal.*;
 
 public class Main
 {
@@ -35,5 +38,36 @@ public class Main
 		System.out.println("The number is formated for Poland = "+numberFormatPL.format(123456789.99));
 		NumberFormat percentFormatPL = NumberFormat.getPercentInstance(polishLanguage);
 		System.out.println("The percent is formated for Poland = "+percentFormatPL.format(50.20));
+		//***********DATE AND TIME*********************************************************
+		FormatStyle style = FormatStyle.FULL;
+		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(style).withLocale(polishLanguage);
+		ZonedDateTime now = ZonedDateTime.now();
+		System.out.println("Nicely formatted current date = "+formatter.format(now));
+		//First day of the week in Poland
+		DayOfWeek dayOfWeek = WeekFields.of(polishLanguage).getFirstDayOfWeek();
+		//We also translate the name of the week using getDisplayName(TextStyle.FULL, polishLanguage)
+		System.out.println("First day of week in Poland = "+dayOfWeek.getDisplayName(TextStyle.FULL, polishLanguage));
+		//**********WORD SORTING***********************************************************
+		Collator collator = Collator.getInstance(polishLanguage);
+		List<String> places = Arrays.asList("Buenos Aires", "Córdoba", "La Plata", "Ązzzz", "Ęzzzzzz1223");
+		places.sort(collator);
+		places.forEach(System.out::println);
+		//For german people this signs are the same. However, polish people can distingush this words
+		String name1 = "Azzzz";
+		String name2 = "Aźźźź";
+		String name3 = "azzzz";
+		collator = Collator.getInstance(germanLanguage);
+		collator.setStrength(Collator.PRIMARY);
+		System.out.println("PRIMARY");
+		System.out.println("Comapre the special signs = "+collator.equals(name1, name2));
+		System.out.println("Compare the size of signs = "+collator.equals(name1, name3));
+		collator.setStrength(Collator.SECONDARY);
+		System.out.println("SECONDARY");
+		System.out.println("Comapre the special signs = "+collator.equals(name1, name2));
+		System.out.println("Compare the size of signs = "+collator.equals(name1, name3));
+		collator.setStrength(Collator.TERTIARY);
+		System.out.println("TERTIARY");
+		System.out.println("Comapre the special signs = "+collator.equals(name1, name2));
+		System.out.println("Compare the size of signs = "+collator.equals(name1, name3));
 	}
 }
