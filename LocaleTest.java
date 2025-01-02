@@ -69,5 +69,8 @@ public class Main
 		System.out.println("TERTIARY");
 		System.out.println("Comapre the special signs = "+collator.equals(name1, name2));
 		System.out.println("Compare the size of signs = "+collator.equals(name1, name3));
+		//Format the Text
+		String msg = MessageFormat.format("Z dnia {0}, drogi {2} zwracam się z prośbą o oddanie pozyczonych pieniędzy w wysokości {1}. Pozdrawiam!", LocalDate.now(), 10.0E8, "XYZ");
+		System.out.println(msg);
 	}
 }
