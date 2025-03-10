@@ -1,0 +1,40 @@
+/******************************************************************************
+
+                            Online Java Compiler.
+                Code, Compile, Run and Debug java program online.
+Write your code in this editor and press "Run" button to execute it.
+
+*******************************************************************************/
+
+import javax.tools.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) {
+	    //We call the compiler
+		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+		int result = compiler.run(System.in, System.out, System.err, "-sourcepath", "src", "file.java");
+		//We create souce file. The file will be located on the disk and will be named file.java
+		StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+		Iterable<? extends JavaFileObject> sources = fileManager.getJavaFileObjectsFromStrings(List.of("file.java"));
+		//Diagnostic - thanks to it we can see the log inforation from the compiler
+		//What happened during the compilation? 
+		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
+		//CompilationTask
+		JavaCompiler.CompilationTask task = compiler.getTask(
+		    null, //error stream; when we put null here we will use default System.err
+		    null, //file manager; when we put null here we will use default JavaFileManager
+		    diagnostics, //diagnostics; when we put null here we will use default System.err
+		    null, //options; null if we haven't any
+		    null, //classes; names of classes to be processed by annotation processing, null means no class names
+		    sources //source file
+		);
+		boolean success = task.call(); // to call task above - we have to have some source file to compile 
+		//We want to see the logs
+		for(var d : diagnostics.getDiagnostics())
+		{
+		    System.out.println(d);
+		}
+	}
+}
