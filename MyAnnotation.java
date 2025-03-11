@@ -14,6 +14,12 @@ Write your code in this editor and press "Run" button to execute it.
     int severity() default 0;
 }
 
+@FunctionalInterface //it check the functional interface - the interface contains only one abstract method
+interface functionalInterface
+{
+    String method1(String arg);
+}
+
 public class Main
 {
     @BugReport(assignedTo = "Different", severity = 10)
@@ -25,10 +31,19 @@ public class Main
     
     private String diff;
     
+    @SuppressWarnings(value = "unchecked") // it disable the warnings
+    private String tmp;
+    
     /*public void metodka(@BugReport Main this) //when we want to use this with annotation
     {
         this.diff = "TMP";
     }*/
+    
+    @SafeVarargs //it take care of multi arguments - thants to it it is safe - it has to be private OR fianl
+    private final void multiArgs (String... args)
+    {
+        System.out.println(args);
+    }
     
 	public static void main(String[] args) {
         
