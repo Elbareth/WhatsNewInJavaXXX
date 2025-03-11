@@ -27,7 +27,7 @@ import java.lang.annotation.*;
 //RetentionPolicy.CLASS   -- we have annotation in code file but annotations are NOT loaded by JVM
 //RetentionPolicy.SOURCE  -- we have NOT annotation in code file AND it is NOT loaded by JVM
 @Documented //should we document annotation?
-//@Repeatable(AnotherBugReport.class) //annotation can be used multiple times on the same element
+@Repeatable(AnotherBugReport.class) //annotation can be used multiple times on the same element
 @Inherited // the children classes should inherit all annotations after the parent class
 @interface BugReport
 {
@@ -36,11 +36,24 @@ import java.lang.annotation.*;
     int severity() default 0;
 }
 
+@Target ({
+    ElementType.ANNOTATION_TYPE, //we an use annotation on another annotation
+    ElementType.PACKAGE,         //we can use annotation on PACKAGE
+    ElementType.TYPE,            //we can use annotation on types of the fields, for example on int, String etc.
+    ElementType.METHOD,          //we can use annotation on METHOD
+    ElementType.CONSTRUCTOR,     //we can use annotation on constructor
+    ElementType.FIELD,           //we can use annotation on fields within the classes
+    ElementType.PARAMETER,       //we can use annotation on parameter within the METHOD
+    ElementType.LOCAL_VARIABLE,   //we can use annotation on local variable within the method
+    ElementType.TYPE_PARAMETER,
+    ElementType.TYPE_USE
+})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
 @interface AnotherBugReport
 {
-    //this annotation will have this two atributes
-    String assignedTo() default "[none]";
-    int severity() default 0;
+    BugReport[] value();
 }
 
 @FunctionalInterface //it check the functional interface - the interface contains only one abstract method
