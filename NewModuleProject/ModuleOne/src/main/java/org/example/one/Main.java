@@ -2,6 +2,8 @@
 package org.example.one;
 
 public class Main {
+    private int arg = 10;
+    private String argStr = "I have private variable and nobody can use it ;p";
     public static void main(String[] args) {
         System.out.printf("Hello and welcome to module one!");
 
