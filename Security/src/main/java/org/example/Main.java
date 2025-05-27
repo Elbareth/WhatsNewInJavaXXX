@@ -1,9 +1,14 @@
 package org.example;
 
+import org.example.services.HashService;
+import org.example.services.JAASService;
 import org.example.services.MyOwnClassLoader;
 
+import javax.security.auth.login.LoginContext;
+import javax.security.auth.login.LoginException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class Main {
@@ -40,6 +45,27 @@ public class Main {
 
         } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
+        }
+        //NOT in use anymore! - https://snyk.io/blog/securitymanager-removed-java/
+        //We want to load policy file
+        //java -Djava.security.policy=mySecurityFile.policy Security -- it means that we also count on global policy settings
+        // - java.policy in java home directory
+        // - .java.policy in user home directory
+        //java -Djava.security.policy==mySecurityFile.policy Security -- to count only on THIS policy file
+        //System.setProperty("java.security.policy", "mySecurityFile.policy");
+        //We have policy file, now we have to set security manager
+        //System.setSecurityManager(new SecurityManager());
+        /**JAAS*/
+        /*try {
+            new JAASService().run();
+        } catch (LoginException e) {
+            e.printStackTrace();
+        }*/
+        HashService hashService = new HashService();
+        try {
+            hashService.createHash("Lubię placki!");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
     }
 }
