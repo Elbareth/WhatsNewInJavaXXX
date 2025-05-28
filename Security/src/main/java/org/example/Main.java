@@ -1,13 +1,20 @@
 package org.example;
 
+import org.example.services.EncryptionService;
 import org.example.services.HashService;
 import org.example.services.JAASService;
 import org.example.services.MyOwnClassLoader;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.ShortBufferException;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
@@ -66,6 +73,20 @@ public class Main {
             hashService.createHash("Lubię placki!");
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        }
+        System.out.println("We will encrypt our data with random key");
+        EncryptionService encryptionService = new EncryptionService();
+        try {
+            encryptionService.encryptForMe("MojeTajeneHaslo:LubiePlacki!");
+            System.out.println("Encrypted password from the file");
+            encryptionService.encryptThePasswordToFile("MojeTajeneHaslo:LubiePlacki!", "KluczLubiePlacki");
+            encryptionService.decryptThePasswordFromFile("KluczLubiePlacki");
+            System.out.println("Now we are working with RSA");
+            encryptionService.encryptRSAForMe("Lubie Placki!");
+            encryptionService.decryptRSAForMe();
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | ShortBufferException | IllegalBlockSizeException |
+                 BadPaddingException | InvalidKeyException | IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }
