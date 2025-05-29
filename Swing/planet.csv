@@ -1,0 +1,9 @@
+Nazwa;Promień;Liczba księżyców;Czy planeta jest gazowa;Kolor;
+Merkury;2440.0;0;false;YELLOW;
+Wenus;6052.0;0;false;ORANGE;
+Ziemia;6378.0;1;false;BLUE;
+Mars;3397.0;2;false;RED;
+Jowisz;71492.0;16;true;ORANGE;
+Saturn;60268.0;18;true;ORANGE;
+Uran;25559.0;17;true;CYAN;
+Neptun;24766.0;8;true;BLUE;
