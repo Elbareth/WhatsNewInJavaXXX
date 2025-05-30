@@ -20,7 +20,7 @@ public class Main {
         };
         Object[] columns = {"Nazwa", "Promień", "Liczba księżyców", "Czy planeta jest gazowa", "Kolor"};
         MyTable myTable = new MyTable();
-        myTable.setTitle("Platetki");
+        myTable.setTitle("Planetki");
         myTable.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //myTable.draw(content,columns);
         myTable.draw();

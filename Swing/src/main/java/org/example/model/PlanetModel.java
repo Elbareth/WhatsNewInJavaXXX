@@ -12,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.Scanner;
 
+//Model that represents our table content - load the content and work on it
 public class PlanetModel extends AbstractTableModel {
 
     private java.util.List<PlanetDTO> planetDTOList = null;
@@ -65,8 +66,41 @@ public class PlanetModel extends AbstractTableModel {
         };
     }
 
+    //I have to have this method to save the value into model
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        PlanetDTO planetDTO = this.planetDTOList.get(rowIndex);
+        switch (columnIndex) {
+            case 0 -> planetDTO.setName((String) aValue);
+            case 1 -> planetDTO.setSize((Double) aValue);
+            case 2 -> planetDTO.setMoonAmount((Integer) aValue);
+            case 3 -> planetDTO.setGasPlanet((Boolean) aValue);
+            case 4 -> planetDTO.setColor((Color) aValue);
+        };
+    }
+
     @Override
     public String getColumnName(int index) {
         return this.column.get(index);
+    }
+
+    //It means we can modify the cells
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true;
+    }
+
+    //Thanks to this method, the model will understand what kind of data it contains within the table
+    //It will create the checkbox for boolean by default
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return switch (columnIndex) {
+            case 0 -> System.class;
+            case 1 -> Double.class;
+            case 2 -> Integer.class;
+            case 3 -> Boolean.class;
+            case 4 -> Color.class;
+            default -> Object.class;
+        };
     }
 }
